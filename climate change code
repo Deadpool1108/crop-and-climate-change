@@ -1,20 +1,27 @@
 import pandas as pd
-import streamlit as st
+import streamlit as st 
 
-file_path = 'path_to_your_file/global-monthly-temp-anomaly (1).xlsx'
-df = pd.read_excel(file_path, sheet_name='global-monthly-temp-anomaly')
+# Update this file path to the correct location of your Excel file
+file_path = 'Projected_impacts_datasheet_11.24.2021.xlsx'  # Replace with the actual path
 
-def app():
-    st.title('Global Monthly Temperature Anomalies')
+# Check if the file exists
+import os
+if not os.path.exists(file_path):
+    print(f"Error: File not found at {file_path}")
+else:
+    df = pd.read_excel(file_path)
 
-    regions = df['Entity'].unique()
-    selected_region = st.sidebar.selectbox('Select Region', regions)
-   
-    region_data = df[df['Entity'] == selected_region]
+    def app():
+        st.title('Global Monthly Temperature Anomalies')
 
-    st.line_chart(region_data.set_index('Day')['Global warming: monthly temperature anomaly'])
-   
-    st.dataframe(region_data)
+        regions = df['Entity'].unique()
+        selected_region = st.sidebar.selectbox('Select Region', regions)
 
-if __name__ == "__main__":
-    app()
+        region_data = df[df['Entity'] == selected_region]
+
+        st.line_chart(region_data.set_index('Day')['Global warming: monthly temperature anomaly'])
+
+        st.dataframe(region_data)
+
+    if __name__ == "__main__":
+        app()

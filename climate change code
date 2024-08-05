@@ -1,10 +1,10 @@
 import pandas as pd
 import streamlit as st 
 
-# Update this file path to the correct location of your Excel file
-file_path = 'Projected_impacts_datasheet_11.24.2021.xlsx'  # Replace with the actual path
 
-# Check if the file exists
+file_path = 'Projected_impacts_datasheet_11.24.2021.xlsx'  
+
+
 import os
 if not os.path.exists(file_path):
     print(f"Error: File not found at {file_path}")

@@ -1,0 +1,16 @@
+import pandas as pd
+import streamlit as st
+
+file_path = 'path_to_your_file/food-emissions-supply-chain (1).xlsx'
+df = pd.read_excel(file_path)
+
+def app():
+    st.title('Food Emissions Supply Chain')
+
+    st.dataframe(df)
+
+if 'Column1' in df.columns and 'Column2' in df.columns:
+        st.line_chart(df.set_index('Column1')['Column2'])
+
+if __name__ == "__main__":
+    app()

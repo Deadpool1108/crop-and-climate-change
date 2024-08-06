@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-
+import matplotlib.pyplot as plt
 # Load the Excel data
 df = pd.read_excel('global-monthly-temp-anomaly.xlsx', sheet_name='YourSheetName')
 

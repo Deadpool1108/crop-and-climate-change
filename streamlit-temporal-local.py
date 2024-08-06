@@ -1,23 +1,25 @@
 import pandas as pd
 import streamlit as st
-import plotly.express as px
 import matplotlib.pyplot as plt
-# Load the Excel data
-df = pd.read_excel('global-monthly-temp-anomaly.xlsx', sheet_name='YourSheetName')
 
-# Convert date column to datetime
-df['Date'] = pd.to_datetime(df['Date'])
+# Load the Excel data
+df = pd.read_excel('food-emissions-supply-chain.xlsx', sheet_name='Data')
 
 # Streamlit app
-st.title('Global Monthly Temperature Anomaly')
+st.title('Food Emissions Supply Chain Analysis')
 
-# User input for year range
-year_range = st.slider('Select Year Range', min_value=df['Date'].dt.year.min(),
-                       max_value=df['Date'].dt.year.max(), value=[df['Date'].dt.year.min(), df['Date'].dt.year.max()])
+# Selectbox for food category
+food_category = st.selectbox('Select Food Category', df['FoodCategory'].unique())
 
-# Filter data based on year range
-filtered_df = df[(df['Date'].dt.year >= year_range[0]) & (df['Date'].dt.year <= year_range[1])]
+# Filter data based on selected food category
+filtered_df = df[df['FoodCategory'] == food_category]
 
-# Create interactive line chart
-fig = px.line(filtered_df, x='Date', y='Anomaly', title='Global Monthly Temperature Anomaly')
-st.plotly_chart(fig)
+# Create bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(filtered_df['EmissionType'], filtered_df['Value'])
+plt.xlabel('Emission Type')
+plt.ylabel('Emission Value')
+plt.title(f'Emissions for {food_category}')
+plt.xticks(rotation=45)
+st.pyplot(plt)
+

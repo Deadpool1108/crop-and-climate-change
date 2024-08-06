@@ -20,4 +20,4 @@ filtered_df = df[(df['Date'].dt.year >= year_range[0]) & (df['Date'].dt.year <= 
 
 # Create interactive line chart
 fig = px.line(filtered_df, x='Date', y='Anomaly', title='Global Monthly Temperature Anomaly')
-st.plotly_chart(fig)
+#st.plotly_chart(fig)
